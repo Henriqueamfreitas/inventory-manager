@@ -1,0 +1,35 @@
+services:
+  node:
+    build:
+      context: './backend'
+      dockerfile: Dockerfile
+    image: henriqueannicchino/node
+    container_name: node_inventory_manager
+    networks:
+      - nodenet
+    volumes:
+      - './backend:/app'
+    tty: true # what does this do?
+    ports:
+      - "5000:5000"
+  
+  nginx:
+    build:
+      context: './nginx'
+      dockerfile: Dockerfile
+    image: henriqueannicchino/nginx
+    container_name: nginx_inventory_manager
+    networks:
+      - nodenet
+    ports:
+      - "8080:80"
+
+networks:
+  nodenet:
+    driver: bridge
+# $ docker-compose up
+  # o up vai fazer subir todos os meus continers 
+
+# $ docker-compose up -d --build
+  # -d if you want to free the terminal
+  # --build if you want to rebuild the image
