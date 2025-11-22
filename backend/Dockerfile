@@ -21,6 +21,6 @@ EXPOSE 5000
   # $ docker build -t henriqueannicchino/node:latest .
 
 # to run the container with the image
-  # docker run --rm -it -p 5000:5000 henriqueannicchino/node
+  # docker run -it --name node_inventory_manager --network nodenet -v $(pwd -W):/app -p 5000:5000 henriqueannicchino/node:latest
 
 # npm run dev inside the container
