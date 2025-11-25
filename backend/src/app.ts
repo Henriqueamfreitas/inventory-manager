@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // ✅ Add the route HERE
 app.get("/", (req, res) => {
-  res.send("API is running 🚀");
+  res.send("API is running222, uhulll 🚀");
 });
 
 export default app;
