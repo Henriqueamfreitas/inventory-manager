@@ -9,6 +9,9 @@ services:
       - nodenet
     volumes:
       - './backend:/app'
+      - /app/node_modules
+    # volumes:
+    #   - './backend:/app'
     tty: true # what does this do?
     ports:
       - "5000:5000"
@@ -27,9 +30,3 @@ services:
 networks:
   nodenet:
     driver: bridge
-# $ docker-compose up
-  # o up vai fazer subir todos os meus continers 
-
-# $ docker-compose up -d --build
-  # -d if you want to free the terminal
-  # --build if you want to rebuild the image
