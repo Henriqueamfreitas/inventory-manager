@@ -11,9 +11,9 @@ services:
       - './backend:/app'
       - /app/node_modules
     tty: true # what does this do?
-    ports:
-      - "5000:5000"
-
+    # ports:
+    #   - "5000:5000"
+# se removermos as portas, só vamos acessar ele via nginx localhost:8080/api
   react:
     build:
       context: './frontend'
