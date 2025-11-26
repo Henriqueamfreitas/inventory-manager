@@ -10,12 +10,25 @@ services:
     volumes:
       - './backend:/app'
       - /app/node_modules
-    # volumes:
-    #   - './backend:/app'
     tty: true # what does this do?
     ports:
       - "5000:5000"
-  
+
+  react:
+    build:
+      context: './frontend'
+      dockerfile: Dockerfile
+    image: henriqueannicchino/react
+    container_name: react_inventory_manager
+    networks:
+      - nodenet
+    volumes:
+      - './frontend:/app'
+      - /app/node_modules
+    tty: true # what does this do?
+    ports:
+      - "5173:5173"
+
   nginx:
     build:
       context: './nginx'

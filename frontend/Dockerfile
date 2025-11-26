@@ -24,12 +24,3 @@ RUN npm install
 # Its not necessary, but its a good practice
 EXPOSE 5173
 
-# to create the image
-  # $ docker build -t henriqueannicchino/node:latest .
-
-# to run the container with the image
-  # docker run -it --name node_inventory_manager --network nodenet -v $(pwd -W):/app -p 5000:5000 henriqueannicchino/node:latest
-  # docker run -it --rm --name react_inventory_manager --network nodenet -v $(pwd -W):/app -p 5173:5173 henriqueannicchino/react:latest sh
-
-
-# npm run dev -- --host 0.0.0.0 inside the container
