@@ -12,7 +12,7 @@ Para subir o frontend
   - está dentro do container e pode rodar no terminal normalmente
   - npm run dev
 
-
+http://localhost:8080/api/
 
 SEM O DOCKER COMPOSE
 - Não precisa dos comandos abaixo em razão do docker-compose, mas, por curiosidade

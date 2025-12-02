@@ -4,14 +4,12 @@ import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 
 const dataSourceConfig = (): DataSourceOptions => {
-
   const entitiesPath = path.join(__dirname, "entities/**/*.{ts,js}");
   const migrationPath = path.join(__dirname, "migrations/**/*.{ts,js}");
 
-  const nodeEnv: string | undefined = process.env.NODE_ENV;
+  const nodeEnv = process.env.NODE_ENV;
 
   if (nodeEnv === "test") {
-
     return {
       type: "sqlite",
       database: ":memory:",
@@ -20,25 +18,27 @@ const dataSourceConfig = (): DataSourceOptions => {
     };
   }
 
-  const dbUrl: string | undefined = process.env.DATABASE_URL;
+  const dbUrl = process.env.DATABASE_URL;
 
-  if (!dbUrl) throw new Error("Missing env var: 'DATABASE_URL'");
+  if (!dbUrl) throw new Error("Missing env var: DATABASE_URL");
 
   return {
     type: "postgres",
     url: dbUrl,
-    // ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
     logging: false,
     entities: [entitiesPath],
     migrations: [migrationPath],
-    migrationsRun: process.env.NODE_ENV === "production",
+    migrationsRun: nodeEnv === "production",
     synchronize: false,
-    extra: process.env.NODE_ENV === "production" ? {
-      max: 20,
-      min: 4,
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 2000
-    } : undefined,
+    extra:
+      nodeEnv === "production"
+        ? {
+            max: 20,
+            min: 4,
+            idleTimeoutMillis: 30000,
+            connectionTimeoutMillis: 2000,
+          }
+        : undefined,
   };
 };
 
