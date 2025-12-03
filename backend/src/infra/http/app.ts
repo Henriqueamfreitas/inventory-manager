@@ -2,6 +2,7 @@ import "express-async-errors";
 import express from "express";
 import cors from "cors";
 import userRoutes from "./routes/user.routes";
+import { errorHandler } from "./middlewares/error-hanlder";
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.get("/", (_req, res) => {
 });
 
 app.use("/users", userRoutes);
+app.use(errorHandler)
 
 export default app;

@@ -1,6 +1,9 @@
 import {
-  Entity, PrimaryGeneratedColumn, Column,
-  CreateDateColumn, UpdateDateColumn
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 
 @Entity("users")
@@ -17,9 +20,12 @@ export class UserEntity {
   @Column()
   password!: string;
 
+  @Column({ default: "employee" })
+  role!: "admin" | "employee";
+
   @CreateDateColumn()
-  created_at!: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn()
-  updated_at!: Date;
+  updatedAt!: Date;
 }
