@@ -8,12 +8,13 @@ export class UserRepository implements IUserRepository {
   private ormRepo = AppDataSource.getRepository(UserEntity);
 
   async findByEmail(email: string): Promise<User | null> {
-    return await this.ormRepo.findOne({ where: { email } });
+    const user = await this.ormRepo.findOne({ where: { email } });
+    return user;
   }
 
-  async create(data: Partial<User>): Promise<SafeUser> {
+  async create(data: Partial<User>): Promise<User> {
     const user = this.ormRepo.create(data);
     const saved = await this.ormRepo.save(user);
-    return removePassword(saved);
+    return saved;
   }
 }

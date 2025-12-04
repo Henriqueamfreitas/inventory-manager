@@ -1,6 +1,6 @@
-import { SafeUser, User } from "../entities/user";
+import { User } from "../entities/user";
 
 export interface IUserRepository {
-  create(data: Partial<User>): Promise<SafeUser>;
+  create(data: Partial<User>): Promise<User>;
   findByEmail(email: string): Promise<User | null>;
 }

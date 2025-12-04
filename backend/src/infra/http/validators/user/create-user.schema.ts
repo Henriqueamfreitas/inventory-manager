@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { ICreateUserDTO } from "../../../../application/dtos/user/create-user.dto";
+import { ICreateUserInputDTO } from "../../../../application/dtos/user/create-user.dto";
 
-export const createUserSchema: z.ZodSchema<ICreateUserDTO> = z.object({
+export const createUserSchema: z.ZodSchema<ICreateUserInputDTO> = z.object({
   name: z.string({ message: "Name is required" }).min(1, "Name cannot be empty"),
 
   email: z.string({ message: "Email is required" }).email("Email must be valid"),

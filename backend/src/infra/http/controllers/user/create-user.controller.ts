@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { UserRepository } from "../../../db/typeorm/repositories/user.repository";
-import { CreateUserUseCase } from "../../../../application/use-cases/user/create-user.usecase";
 import { createUserSchema } from "../../validators/user/create-user.schema";
+import { CreateUserUseCase } from "../../../../application/use-cases/user/create-user.usecase";
 
 export class CreateUserController {
   async handle(req: Request, res: Response) {

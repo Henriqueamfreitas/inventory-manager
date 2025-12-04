@@ -1,13 +1,13 @@
-import { ICreateUserDTO } from "../../dtos/user/create-user.dto";
+import { ICreateUserInputDTO, ICreateUserOutputDTO } from "../../dtos/user/create-user.dto";
 import { IUserRepository } from "../../../domain/repositories/user.repository";
 import bcrypt from "bcryptjs";
-import { SafeUser } from "../../../domain/entities/user";
-import { EmailAlreadyExistsError } from "../../../domain/errors/EmailAlreadyExistsError";
+import { EmailAlreadyExistsError } from "../../../domain/errors/user/EmailAlreadyExistsError";
+import { removePassword } from "../../../infra/db/typeorm/utils/removePassword";
 
 export class CreateUserUseCase {
   constructor(private userRepository: IUserRepository) { }
 
-  async execute(data: ICreateUserDTO): Promise<SafeUser> {
+  async execute(data: ICreateUserInputDTO): Promise<ICreateUserOutputDTO> {
     const exists = await this.userRepository.findByEmail(data.email);
     if (exists) {
       throw new EmailAlreadyExistsError();
@@ -20,6 +20,6 @@ export class CreateUserUseCase {
       password: hashedPassword,
     });
 
-    return newUser;
+    return removePassword(newUser);
   }
 }

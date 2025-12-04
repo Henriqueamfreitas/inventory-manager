@@ -1,4 +1,4 @@
-import { ConflictError } from "../../shared/errors/ConflictError";
+import { ConflictError } from "../../../shared/errors/ConflictError";
 
 export class EmailAlreadyExistsError extends ConflictError {
   constructor() {
