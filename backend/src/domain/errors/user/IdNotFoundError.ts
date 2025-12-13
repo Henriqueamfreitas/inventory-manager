@@ -1,7 +1,7 @@
 import { NotFoundError } from "../../../shared/errors/NotFoundError";
 
-export class EmailNotFoundError extends NotFoundError {
+export class IdNotFoundError extends NotFoundError {
   constructor() {
-    super("Email not found");
+    super("Id not found");
   }
 }

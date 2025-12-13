@@ -12,7 +12,7 @@ export function errorHandler(
   if (err instanceof ZodError) {
     const formatted = err.issues.map((e) => ({
       field: e.path.join("."),
-      message: e.message, // this now uses your custom messages
+      message: e.message,
     }));
 
     return res.status(400).json({
@@ -28,8 +28,6 @@ export function errorHandler(
       message: err.message,
     });
   }
-
-  console.error(err); // Useful for debugging
 
   return res.status(500).json({
     success: false,

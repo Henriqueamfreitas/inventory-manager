@@ -1,10 +1,12 @@
 import { Router } from "express";
 import { CreateUserController } from "../controllers/user/create-user.controller";
 import { FindUserByEmailController } from "../controllers/user/find-user-by-email.controller";
+import { FindUserByIdController } from "../controllers/user/find-user-by-id.controller";
 
 const userRoutes = Router();
 
 userRoutes.post("/", new CreateUserController().handle);
-userRoutes.get("/", new FindUserByEmailController().handle);
+userRoutes.get("/email/:email", new FindUserByEmailController().handle);
+userRoutes.get("/:id", new FindUserByIdController().handle);
 
 export default userRoutes;
