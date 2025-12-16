@@ -44,4 +44,14 @@ export class UserRepository implements IUserRepository {
 
     return { users, total }
   }
+
+  async update(data: Partial<User>): Promise<User | null> {
+    const user = await this.ormRepo.findOne({ where: { id: data.id } });
+    
+    if (!user) return null;
+
+    const updatedUser = this.ormRepo.merge(user, data);
+
+    return await this.ormRepo.save(updatedUser);
+  }
 }

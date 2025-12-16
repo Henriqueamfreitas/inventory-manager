@@ -5,6 +5,7 @@ export interface IUserRepository {
   findByEmail(email: string): Promise<User | null>;
   findById(id: string): Promise<User | null>;
   findAll(data: IFindAllParams): Promise<IFindAllResponse>;
+  update(data: Partial<User>): Promise<User | null>
 }
 
 export interface IFindAllParams {
