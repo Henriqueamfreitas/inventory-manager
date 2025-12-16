@@ -4,4 +4,32 @@ export interface IUserRepository {
   create(data: Partial<User>): Promise<User>;
   findByEmail(email: string): Promise<User | null>;
   findById(id: string): Promise<User | null>;
+  findAll(data: IFindAllParams): Promise<IFindAllResponse>;
 }
+
+export interface IFindAllParams {
+  name?: string,
+  email?: string,
+  role?: "admin" | "employee",
+  page?: number,
+  perPage?: number,
+}
+
+export interface IFindAllResponse {
+  users: User[],
+  total: number,
+}
+
+/*
+👉 Defines what the application needs from persistence
+
+Contracts only
+
+No TypeORM
+
+No Express
+
+No pagination math
+
+📜 “This is the promise.”
+*/

@@ -1,8 +1,9 @@
-import { IUserRepository } from "../../../../domain/repositories/user.repository";
+import { IFindAllParams, IFindAllResponse, IUserRepository } from "../../../../domain/repositories/user.repository";
 import { UserEntity } from "../entities/user.entity";
 import { AppDataSource } from "../database";
 import { SafeUser, User } from "../../../../domain/entities/user";
 import { removePassword } from "../utils/removePassword";
+import { ILike, In } from "typeorm";
 
 export class UserRepository implements IUserRepository {
   private ormRepo = AppDataSource.getRepository(UserEntity);
@@ -21,5 +22,26 @@ export class UserRepository implements IUserRepository {
   async findById(id: string): Promise<User | null> {
     const user = await this.ormRepo.findOne({ where: { id } })
     return user
+  }
+
+  async findAll(data: IFindAllParams): Promise<IFindAllResponse> {
+    const where: any = {}
+    if (data.name) where.name = ILike(`%${data.name}%`);
+    if (data.email) where.email = ILike(`%${data.email}%`);
+    if (data.role) where.role = data.role
+
+    const perPage = data.perPage || 10
+    const page = data.page || 1
+
+    const [users, total] = await this.ormRepo.findAndCount({
+      where,
+      skip: (page - 1) * perPage,
+      take: perPage,
+      order: {
+        createdAt: 'DESC'
+      }
+    })
+
+    return { users, total }
   }
 }
