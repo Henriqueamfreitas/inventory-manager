@@ -47,11 +47,22 @@ export class UserRepository implements IUserRepository {
 
   async update(data: Partial<User>): Promise<User | null> {
     const user = await this.ormRepo.findOne({ where: { id: data.id } });
-    
+
     if (!user) return null;
 
     const updatedUser = this.ormRepo.merge(user, data);
 
     return await this.ormRepo.save(updatedUser);
   }
+
+  async updatePassword(id: string, password: string): Promise<User | null> {
+    const user = await this.ormRepo.findOne({ where: { id: id } })
+
+    if (!user) return null
+
+    user.password = password;
+
+    return await this.ormRepo.save(user);
+  }
+
 }
