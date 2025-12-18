@@ -1,8 +1,7 @@
 import { IFindAllParams, IFindAllResponse, IUserRepository } from "../../../../domain/repositories/user.repository";
 import { UserEntity } from "../entities/user.entity";
 import { AppDataSource } from "../database";
-import { SafeUser, User } from "../../../../domain/entities/user";
-import { removePassword } from "../utils/removePassword";
+import { User } from "../../../../domain/entities/user";
 import { ILike, In } from "typeorm";
 
 export class UserRepository implements IUserRepository {
@@ -63,6 +62,15 @@ export class UserRepository implements IUserRepository {
     user.password = password;
 
     return await this.ormRepo.save(user);
+  }
+
+  async deactivate(id: string): Promise<boolean> {
+    const result = await this.ormRepo.update(
+      { id },
+      { isActive: false }
+    );
+
+    return result.affected === 1;
   }
 
 }

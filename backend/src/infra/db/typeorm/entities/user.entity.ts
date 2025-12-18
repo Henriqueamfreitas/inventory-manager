@@ -23,6 +23,9 @@ export class UserEntity {
   @Column({ default: "employee" })
   role!: "admin" | "employee";
 
+  @Column({ default: true })
+  isActive!: boolean;
+  
   @CreateDateColumn()
   createdAt!: Date;
 

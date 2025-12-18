@@ -7,6 +7,7 @@ export interface IUserRepository {
   findAll(data: IFindAllParams): Promise<IFindAllResponse>;
   update(data: Partial<User>): Promise<User | null>;
   updatePassword(id: string, password: string): Promise<User | null>;
+  deactivate(id: string): Promise<boolean>;
 }
 
 export interface IFindAllParams {

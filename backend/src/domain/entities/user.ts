@@ -4,6 +4,7 @@ export class User {
   email!: string;
   password!: string;
   role!: "admin" | "employee";
+  isActive!: boolean;
   createdAt!: Date;
   updatedAt!: Date;
 }
