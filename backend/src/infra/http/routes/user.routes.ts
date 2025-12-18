@@ -6,6 +6,7 @@ import { ListUsersController } from "../controllers/user/list-users.controller";
 import { UpdateUserController } from "../controllers/user/update-user.controller";
 import { UpdatePasswordController } from "../controllers/user/update-password.controller";
 import { DeactivateUserController } from "../controllers/user/deactivate-user.controller";
+import { ActivateUserController } from "../controllers/user/activate-user.controller";
 
 const userRoutes = Router();
 
@@ -19,5 +20,6 @@ userRoutes.delete("/:id", new DeactivateUserController().handle);
 userRoutes.patch("/:id/password", new UpdatePasswordController().handle);
 
 userRoutes.get("/email/:email", new FindUserByEmailController().handle);
+userRoutes.patch("/:id/activate", new ActivateUserController().handle);
 
 export default userRoutes;

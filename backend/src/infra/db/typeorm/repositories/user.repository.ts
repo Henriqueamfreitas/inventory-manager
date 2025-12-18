@@ -64,7 +64,11 @@ export class UserRepository implements IUserRepository {
     return await this.ormRepo.save(user);
   }
 
-  async deactivate(id: string): Promise<boolean> {
+  async deactivate(id: string): Promise<boolean | null> {
+    const user = await this.ormRepo.findOne({ where: { id: id } })
+
+    if (!user) return null
+
     const result = await this.ormRepo.update(
       { id },
       { isActive: false }
@@ -72,5 +76,16 @@ export class UserRepository implements IUserRepository {
 
     return result.affected === 1;
   }
+
+  async activate(id: string): Promise<User | null> {
+    const user = await this.ormRepo.findOne({ where: { id: id } })
+
+    if (!user) return null
+
+    const updatedUser = this.ormRepo.merge(user, { isActive: true });
+
+    return await this.ormRepo.save(updatedUser);
+  }
+
 
 }
