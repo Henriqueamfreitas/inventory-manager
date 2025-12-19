@@ -2,7 +2,7 @@ import { SafeUser } from "../../../domain/entities/user";
 import { IdNotFoundError } from "../../../domain/errors/user/IdNotFoundError";
 import { IUserRepository } from "../../../domain/repositories/user.repository";
 import { removePassword } from "../../../infra/db/typeorm/utils/removePassword";
-import { IUpdatePasswordInputDTO, IUpdatePasswordOutputDTO } from "../../dtos/user/update-password";
+import { IUpdatePasswordInputDTO, IUpdatePasswordOutputDTO } from "../../dtos/user/update-password.dto";
 import bcrypt from "bcryptjs";
 
 export class UpdatePasswordUseCase {

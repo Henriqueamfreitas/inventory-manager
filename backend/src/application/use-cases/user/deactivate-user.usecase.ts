@@ -1,6 +1,6 @@
 import { IdNotFoundError } from "../../../domain/errors/user/IdNotFoundError";
 import { IUserRepository } from "../../../domain/repositories/user.repository";
-import { IDeactivateUserInputDTO } from "../../dtos/user/deactivate-user";
+import { IDeactivateUserInputDTO } from "../../dtos/user/deactivate-user.dto";
 
 export class DeactivateUserUseCase {
   constructor(private userRepository: IUserRepository) { }

@@ -1,6 +1,6 @@
 import { IUserRepository } from "../../../domain/repositories/user.repository";
 import { removePassword } from "../../../infra/db/typeorm/utils/removePassword";
-import { IFindUserByIdInputDTO, IFindUserByIdOutputDTO } from "../../dtos/user/find-user-by-id";
+import { IFindUserByIdInputDTO, IFindUserByIdOutputDTO } from "../../dtos/user/find-user-by-id.dto";
 import { IdNotFoundError } from "../../../domain/errors/user/IdNotFoundError";
 
 export class FindUserByIdUseCase {

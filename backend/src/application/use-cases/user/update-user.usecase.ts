@@ -2,7 +2,7 @@ import { SafeUser } from "../../../domain/entities/user";
 import { IdNotFoundError } from "../../../domain/errors/user/IdNotFoundError";
 import { IUserRepository } from "../../../domain/repositories/user.repository";
 import { removePassword } from "../../../infra/db/typeorm/utils/removePassword";
-import { IUpdateUserInputDTO, IUpdateUserOutputDTO } from "../../dtos/user/update-user";
+import { IUpdateUserInputDTO, IUpdateUserOutputDTO } from "../../dtos/user/update-user.dto";
 
 export class UpdateUserUseCase {
   constructor(private userRepository: IUserRepository) { }

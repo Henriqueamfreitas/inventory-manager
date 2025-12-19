@@ -1,7 +1,7 @@
 import { IdNotFoundError } from "../../../domain/errors/user/IdNotFoundError";
 import { IUserRepository } from "../../../domain/repositories/user.repository";
 import { removePassword } from "../../../infra/db/typeorm/utils/removePassword";
-import { IActivateUserInputDTO, IActivateUserOutputDTO } from "../../dtos/user/activate-user";
+import { IActivateUserInputDTO, IActivateUserOutputDTO } from "../../dtos/user/activate-user.dto";
 
 export class ActivateUserUseCase {
   constructor(private userRepository: IUserRepository) { }

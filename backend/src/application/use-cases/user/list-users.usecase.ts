@@ -1,7 +1,7 @@
 import { SafeUser } from "../../../domain/entities/user";
 import { IUserRepository } from "../../../domain/repositories/user.repository";
 import { removePassword } from "../../../infra/db/typeorm/utils/removePassword";
-import { IListUsersInputDTO, IListUsersOutputDTO } from "../../dtos/user/list-users";
+import { IListUsersInputDTO, IListUsersOutputDTO } from "../../dtos/user/list-users.dto";
 
 export class ListUsersUseCase {
   constructor(private userRepository: IUserRepository) { }
