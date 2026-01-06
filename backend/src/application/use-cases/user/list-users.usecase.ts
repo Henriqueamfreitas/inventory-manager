@@ -11,12 +11,14 @@ export class ListUsersUseCase {
 
     const safeUsers = users?.map(user => removePassword(user) as SafeUser)
 
-    return { data: safeUsers, meta: {
-      page: Number(data.page ?? 1),
-      perPage: Number(data.perPage ?? 10),
-      total,
-      totalPages: Math.ceil(total / (data.perPage ?? 10)),
-    } }
+    return {
+      data: safeUsers, meta: {
+        page: Number(data.page ?? 1),
+        perPage: Number(data.perPage ?? 10),
+        total,
+        totalPages: Math.ceil(total / (data.perPage ?? 10)),
+      }
+    }
   }
 }
 
