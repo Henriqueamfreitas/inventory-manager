@@ -8,6 +8,7 @@ export function errorHandler(
   res: Response,
   next: NextFunction
 ) {
+  console.log('error:', err)
 
   if (err instanceof ZodError) {
     const formatted = err.issues.map((e) => ({

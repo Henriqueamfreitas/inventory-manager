@@ -8,3 +8,8 @@ export interface StockMovement {
   reason?: string;
   createdAt: Date;
 }
+
+export type CreateStockMovementDTO = Omit<
+  StockMovement,
+  "id" | "createdAt"
+>;
