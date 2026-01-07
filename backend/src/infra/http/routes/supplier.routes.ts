@@ -1,4 +1,9 @@
 import { Router } from "express";
+
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
+import { ensureActiveUser } from "../middlewares/ensureActiveUser";
+import { ensureAdmin } from "../middlewares/ensureAdmin";
+
 import { CreateSupplierController } from "../controllers/supplier/create-supplier.controller";
 import { ListSuppliersController } from "../controllers/supplier/list-suppliers.controller";
 import { FindSupplierByIdController } from "../controllers/supplier/find-supplier-by-id.controller";
@@ -7,10 +12,27 @@ import { DeactivateSupplierController } from "../controllers/supplier/deactivate
 
 const supplierRoutes = Router();
 
-supplierRoutes.post("/", new CreateSupplierController().handle);
+supplierRoutes.use(ensureAuthenticated, ensureActiveUser);
+
 supplierRoutes.get("/", new ListSuppliersController().handle);
 supplierRoutes.get("/:id", new FindSupplierByIdController().handle);
-supplierRoutes.patch("/:id", new UpdateSupplierController().handle);
-supplierRoutes.patch("/:id/deactivate", new DeactivateSupplierController().handle);
+
+supplierRoutes.post(
+  "/",
+  ensureAdmin,
+  new CreateSupplierController().handle
+);
+
+supplierRoutes.patch(
+  "/:id",
+  ensureAdmin,
+  new UpdateSupplierController().handle
+);
+
+supplierRoutes.patch(
+  "/:id/deactivate",
+  ensureAdmin,
+  new DeactivateSupplierController().handle
+);
 
 export default supplierRoutes;
